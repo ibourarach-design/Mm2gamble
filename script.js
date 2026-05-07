@@ -1,0 +1,1 @@
+/* JS inclus dans index.html */
