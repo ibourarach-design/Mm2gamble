@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MM2Gamble</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="phone">
+    <header class="top">
+      <div class="logo">MM2<span>GAMBLE</span></div>
+      <div class="wallet"><span>💎</span><b>0</b></div>
+    </header>
+
+    <main class="content">
+      <section class="promo">
+        <div class="gem-big">💎</div>
+        <div>
+          <h1>Coinflip is now active!</h1>
+          <p>Play now and win items.</p>
+          <h3>Click here for all the prizes!</h3>
+        </div>
+        <span class="chev">›</span>
+      </section>
+
+      <section class="stat">
+        <div class="icon">⬡</div>
+        <div>
+          <h2>68</h2>
+          <p>Total Items</p>
+        </div>
+      </section>
+
+      <section class="stat">
+        <div class="icon green">💎</div>
+        <div>
+          <h2>7,997</h2>
+          <p>Total Value</p>
+        </div>
+      </section>
+
+      <section class="stat">
+        <div class="icon">👥</div>
+        <div>
+          <h2>3</h2>
+          <p>Active Games</p>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="create">Create</button>
+        <button class="history">History</button>
+      </div>
+
+      <section class="coinflip">
+        <div class="title"><span></span>MM2 COINFLIP</div>
+
+        <div class="versus">
+          <div class="side">
+            <div class="avatar blue-ring">
+              <div class="face hair">🙂</div>
+            </div>
+            <div class="label blue">BLEU</div>
+          </div>
+
+          <div class="vs">VS</div>
+
+          <div class="side">
+            <div class="avatar yellow-ring">
+              <div class="face cap">😎</div>
+            </div>
+            <div class="label yellow">JAUNE</div>
+          </div>
+        </div>
+
+        <div class="items">
+          <div class="item">🗡️</div>
+          <div class="item">🗡️</div>
+          <div class="item">🔫</div>
+          <div class="item">🔫</div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="nav">
+      <button onclick="showPanel('menu')"><span>☰</span><small>Menu</small></button>
+      <button onclick="showPanel('games')" class="active"><span>⚙️</span><small>Games</small></button>
+      <button onclick="showPanel('chat')"><span>▢</span><small>Chat</small></button>
+    </nav>
+  </div>
+
+  <div class="overlay" id="menu">
+    <div class="sheet">
+      <div class="sheet-head"><h2>Menu</h2><button onclick="closePanels()">×</button></div>
+      <div class="row">🏠 <b>Dashboard</b><span>›</span></div>
+      <div class="row">📦 <b>Inventory</b><span>›</span></div>
+      <div class="row">👥 <b>Affiliates</b><span>›</span></div>
+      <div class="row">🎁 <b>Rewards</b><span>›</span></div>
+      <div class="row">⚙️ <b>Settings</b><span>›</span></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="games">
+    <div class="sheet small">
+      <div class="sheet-head"><h2>Games</h2><button onclick="closePanels()">×</button></div>
+      <div class="row game-row">🪙 <div><b>Coinflip</b><p>Pick a side and win!</p></div><span>›</span></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="chat">
+    <div class="sheet">
+      <div class="sheet-head"><h2>Chat</h2><button onclick="closePanels()">×</button></div>
+      <div class="msg"><b style="color:#3672ff">Player1</b><p>Yo gl</p></div>
+      <div class="msg"><b style="color:#ffd51b">Player2</b><p>Good luck!</p></div>
+      <div class="msg"><b style="color:#33ef7b">Player3</b><p>Who wants to coinflip?</p></div>
+      <div class="send"><input placeholder="Type a message..." /><button>➤</button></div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
