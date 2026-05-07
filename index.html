@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MM2Gamble</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="orb">◇</div>
+      <div class="logo">MM2<span>GAMBLE</span></div>
+    </div>
+
+    <div class="balance">
+      <span>💎</span>
+      <b>0</b>
+    </div>
+  </header>
+
+  <main class="app">
+
+    <section class="banner">
+      <div class="banner-icon">💎</div>
+      <div>
+        <h1>Coinflip is now active!</h1>
+        <p>Play now and win items.</p>
+        <strong>Click here for all the prizes!</strong>
+      </div>
+      <div class="arrow">›</div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div>
+          <h2>68</h2>
+          <p>Total Items</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green-icon">💎</div>
+        <div>
+          <h2>7,997</h2>
+          <p>Total Value</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div>
+          <h2>3</h2>
+          <p>Active Games</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="action-row">
+      <button class="btn create">Create</button>
+      <button class="btn history">History</button>
+    </div>
+
+    <section class="game-tab">
+      <span></span>
+      MM2 COINFLIP
+    </section>
+
+    <section class="match-card">
+      <div class="players">
+        <div class="player">
+          <div class="avatar blue-ring">🙂</div>
+          <div class="tag blue">BLEU</div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="player">
+          <div class="avatar yellow-ring">😎</div>
+          <div class="tag yellow">JAUNE</div>
+        </div>
+      </div>
+
+      <div class="items">
+        <div class="item">🗡️</div>
+        <div class="item">🗡️</div>
+        <div class="item">🔫</div>
+        <div class="item">🔫</div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button onclick="openMenu()">
+      ☰
+      <small>Menu</small>
+    </button>
+
+    <button onclick="openGames()" class="active">
+      🎰
+      <small>Games</small>
+    </button>
+
+    <button onclick="openChat()">
+      💬
+      <small>Chat</small>
+    </button>
+  </nav>
+
+  <div id="menuModal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>Menu</h2>
+        <button onclick="closeAll()">×</button>
+      </div>
+
+      <div class="menu-item">🏠 Dashboard <span>›</span></div>
+      <div class="menu-item">📦 Inventory <span>›</span></div>
+      <div class="menu-item">👥 Affiliates <span>›</span></div>
+      <div class="menu-item">🎁 Rewards <span>›</span></div>
+      <div class="menu-item">⚙️ Settings <span>›</span></div>
+    </div>
+  </div>
+
+  <div id="gamesModal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>Games</h2>
+        <button onclick="closeAll()">×</button>
+      </div>
+
+      <div class="menu-item">🎰 Coinflip <span>›</span></div>
+    </div>
+  </div>
+
+  <div id="chatModal" class="modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>Chat</h2>
+        <button onclick="closeAll()">×</button>
+      </div>
+
+      <div class="chat-msg blue-msg"><b>Player1</b><p>Yo gl</p></div>
+      <div class="chat-msg yellow-msg"><b>Player2</b><p>Good luck!</p></div>
+      <div class="chat-msg green-msg"><b>Player3</b><p>Who wants to coinflip?</p></div>
+
+      <div class="chat-input">
+        <input placeholder="Type a message..." />
+        <button>➤</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
