@@ -1,0 +1,1 @@
+/* Tout le JavaScript est directement dans index.html. */
