@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM2Gamble</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#05070b;color:white;font-family:Arial,Helvetica,sans-serif}body{padding-bottom:86px;background:radial-gradient(circle at top,rgba(34,255,117,.12),transparent 32%),linear-gradient(#0c1119,#05070b)}
+.top{height:82px;background:#090d14;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;padding:0 20px;position:sticky;top:0;z-index:8}.logo{font-size:28px;font-weight:900;letter-spacing:-1px}.logo span{color:#22e86f}.wallet{background:#141a25;border-radius:17px;padding:14px 18px;font-size:16px;font-weight:900;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.main{max-width:540px;margin:auto;padding:16px}.promo{border:1.5px solid #20dd67;border-radius:13px;background:linear-gradient(135deg,#07130e,#111820);padding:18px;display:flex;align-items:center;gap:15px;margin-bottom:14px}.promo .gem{font-size:38px;filter:drop-shadow(0 0 10px #22e86f)}.promo h1{font-size:22px;margin:0 0 6px;color:#2bf074}.promo p{margin:0;color:#dfe4ed}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}.stat{background:linear-gradient(145deg,#161c26,#10151d);border:1px solid rgba(255,255,255,.05);border-radius:11px;padding:14px}.stat h2{margin:0;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stat p{margin:6px 0 0;color:#abb3c1;font-size:14px}
+.actions{display:flex;gap:10px;margin-bottom:14px}button{border:0;cursor:pointer}.create{flex:1;height:52px;border-radius:10px;background:linear-gradient(#2de874,#18b94f);color:white;font-weight:900;font-size:17px}.dark{height:52px;border-radius:10px;background:#202633;color:white;font-weight:900;font-size:16px;padding:0 20px}
+.panel{background:linear-gradient(145deg,#171d27,#10151d);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-bottom:14px;overflow:hidden}.head{height:54px;display:flex;align-items:center;gap:10px;padding:0 16px;font-size:18px;font-weight:900;border-bottom:1px solid rgba(255,255,255,.06)}.head:before{content:"";width:8px;height:32px;background:#21ed75;border-radius:8px}
+.search{width:100%;height:48px;margin:12px 0;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:#0d121a;color:white;padding:0 14px;font-size:15px}
+.inventory{padding:0 12px 12px;max-height:445px;overflow:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.item{min-height:195px;background:linear-gradient(145deg,#222936,#151b25);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:10px;border:1px solid rgba(255,255,255,.05)}.item.selectedCard{border:1.5px solid #23df72;box-shadow:0 0 18px rgba(35,223,114,.18)}.itemImg{width:100%;height:112px;object-fit:contain;border-radius:12px;background:#0d121a}.info{width:100%}.info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info small{color:#aeb6c5;font-size:11px}.value{font-weight:900;color:#23ee76}.qty{color:#c6ccd7;font-size:11px}.pick{width:100%;height:34px;background:#2f66ff;color:white;border-radius:9px;font-weight:900}.pick.selected{background:#23df72;color:#041008}
+.bet{padding:12px}.selectedList{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.chip{background:#212836;border-radius:12px;padding:6px 8px;font-size:12px;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:6px}.chip img{width:32px;height:32px;object-fit:contain;border-radius:7px;background:#0d121a}.sideBtns{display:flex;gap:10px;margin-top:12px}.blueBtn,.yellowBtn{flex:1;height:50px;border-radius:10px;color:white;font-size:17px;font-weight:900}.blueBtn{background:#2f66ff}.yellowBtn{background:#ffd519;color:#111}
+.match{padding:12px}.matchCard{background:linear-gradient(145deg,#222936,#141a24);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,.06);margin-top:10px}.matchTop{display:flex;align-items:center;justify-content:space-between;gap:10px}.matchTop b{font-size:16px}.botBtn{height:42px;border-radius:10px;background:#ffd519;color:#111;font-weight:900;padding:0 18px}.viewBtn{height:42px;border-radius:10px;background:#2f66ff;color:white;font-weight:900;padding:0 18px}.matchItems{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.mini{background:#0d121a;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:6px;font-size:11px;width:72px;text-align:center}.mini img{width:58px;height:58px;object-fit:contain;display:block;margin:auto}.result{min-height:28px;font-weight:900;font-size:18px;margin-top:14px;color:#2bf074}
+.coin{width:96px;height:96px;border-radius:50%;margin:8px auto 14px;display:none;place-items:center;font-size:48px;background:linear-gradient(135deg,#2f66ff,#ffd519)}.coin.spin{display:grid;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotateY(360deg)}}
+.nav{position:fixed;left:0;right:0;bottom:0;height:82px;background:#101620;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-around;align-items:center;z-index:20}.nav button{background:none;color:#cbd1dc;font-size:26px;display:flex;flex-direction:column;gap:4px;align-items:center}.nav small{font-size:12px}.active{color:#25ea74!important}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;z-index:50;padding:70px 18px 96px;overflow:auto}.modal.show{display:block}.box{max-width:520px;margin:auto;background:linear-gradient(150deg,#1c2230,#111821);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}.boxHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.boxHead h2{margin:0}.close{background:none;color:white;font-size:34px}.row{min-height:62px;background:#222936;border-radius:10px;display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:9px}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.detailItem{background:#151b25;border-radius:12px;padding:10px;text-align:center}.detailItem img{width:100%;height:105px;object-fit:contain;background:#0d121a;border-radius:10px}.detailItem b{display:block;margin-top:6px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.detailItem small{color:#aeb6c5}
+@media(max-width:390px){.logo{font-size:25px}.wallet{font-size:15px;max-width:150px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="logo">MM2<span>GAMBLE</span></div><div class="wallet">💎 <span id="gems">12,447,975,375</span></div></header>
+<main class="main">
+<section class="promo"><div class="gem">💎</div><div><h1>Coinflip demo</h1><p>Post un bet, clique BOT, puis ouvre le match.</p></div></section>
+<div class="stats"><div class="stat"><h2>x99</h2><p>Chaque item</p></div><div class="stat"><h2>12,447,975,375</h2><p>Valeur inventaire</p></div></div>
+<div class="actions"><button class="create" onclick="scrollToInv()">Choisir un item</button><button class="dark" onclick="clearBet()">Reset</button></div>
+
+<section class="panel"><div class="head">ACTIVE MATCH</div><div class="match" id="matchArea"><p style="color:#aeb6c5">Aucun match posté. Choisis des items puis clique “Post Coinflip”.</p></div></section>
+
+<section class="panel" id="invPanel"><div class="head">YOUR INVENTORY — x99 chaque item</div><div class="bet">
+<b>Selected bet:</b> <span id="betValue">0</span> value
+<div class="selectedList" id="selectedList"></div>
+<div class="sideBtns"><button class="blueBtn" onclick="postMatch('blue')">Post BLEU</button><button class="yellowBtn" onclick="postMatch('yellow')">Post JAUNE</button></div>
+<input class="search" id="search" placeholder="Chercher un item..." oninput="renderItems()">
+</div><div class="inventory" id="inventory"></div></section>
+</main>
+
+<nav class="nav"><button onclick="openModal('menu')">☰<small>Menu</small></button><button class="active" onclick="scrollToInv()">⚙️<small>Games</small></button><button onclick="openModal('chat')">▢<small>Chat</small></button></nav>
+
+<div class="modal" id="menu"><div class="box"><div class="boxHead"><h2>Menu</h2><button class="close" onclick="closeModal()">×</button></div><div class="row">🏠 Dashboard</div><div class="row">📦 Inventory</div><div class="row">🎁 Rewards</div><div class="row">⚙️ Settings</div></div></div>
+<div class="modal" id="chat"><div class="box"><div class="boxHead"><h2>Chat</h2><button class="close" onclick="closeModal()">×</button></div><div class="row">🤖 MM2Bot: click BOT and I will join.</div><div class="row">👤 Player1: gl</div></div></div>
+<div class="modal" id="details"><div class="box"><div class="boxHead"><h2>Match details</h2><button class="close" onclick="closeModal()">×</button></div><div id="detailContent"></div></div></div>
+
+<script>
+const items = [{"name": "Nik's Scythe", "rarity": "Ancient", "value": 125000000, "icon": "🔱", "qty": 99, "img": "assets/nik-s-scythe.png"}, {"name": "Chroma Traveler's Gun", "rarity": "Chroma", "value": 227500, "icon": "🌈🔫", "qty": 99, "img": "assets/chroma-traveler-s-gun.png"}, {"name": "Chroma Evergun", "rarity": "Chroma", "value": 100500, "icon": "🌈🔫", "qty": 99, "img": "assets/chroma-evergun.png"}, {"name": "Chroma Evergreen", "rarity": "Chroma", "value": 60000, "icon": "🌈🗡️", "qty": 99, "img": "assets/chroma-evergreen.png"}, {"name": "Red Icecrusher", "rarity": "Ancient", "value": 45000, "icon": "🪓", "qty": 99, "img": "assets/red-icecrusher.png"}, {"name": "Red Icepiercer", "rarity": "Ancient", "value": 45000, "icon": "🏹", "qty": 99, "img": "assets/red-icepiercer.png"}, {"name": "Blue Elderwood Blade", "rarity": "Ancient", "value": 45000, "icon": "🗡️", "qty": 99, "img": "assets/blue-elderwood-blade.png"}, {"name": "Blue Synthwave", "rarity": "Godly", "value": 40000, "icon": "🔫", "qty": 99, "img": "assets/blue-synthwave.png"}, {"name": "Blue Swirly Axe", "rarity": "Ancient", "value": 40000, "icon": "🪓", "qty": 99, "img": "assets/blue-swirly-axe.png"}, {"name": "Chroma Vampire's Gun", "rarity": "Chroma", "value": 38800, "icon": "🌈🔫", "qty": 99, "img": "assets/chroma-vampire-s-gun.png"}, {"name": "Gingerscope", "rarity": "Ancient", "value": 16500, "icon": "🔫", "qty": 99, "img": "assets/gingerscope.png"}, {"name": "Chroma Raygun", "rarity": "Chroma", "value": 15500, "icon": "🌈🔫", "qty": 99, "img": "assets/chroma-raygun.png"}, {"name": "Chroma Sunrise", "rarity": "Chroma", "value": 10500, "icon": "🌈🗡️", "qty": 99, "img": "assets/chroma-sunrise.png"}, {"name": "Chroma Snowcannon", "rarity": "Chroma", "value": 8500, "icon": "🌈🔫", "qty": 99, "img": "assets/chroma-snowcannon.png"}, {"name": "Chroma Blizzard", "rarity": "Chroma", "value": 8000, "icon": "🌈🗡️", "qty": 99, "img": "assets/chroma-blizzard.png"}, {"name": "Corrupt", "rarity": "Unique", "value": 6500, "icon": "🗡️", "qty": 99, "img": "assets/corrupt.png"}, {"name": "Elderwood Scythe", "rarity": "Ancient", "value": 5200, "icon": "🪓", "qty": 99, "img": "assets/elderwood-scythe.png"}, {"name": "Traveler's Gun", "rarity": "Godly", "value": 4500, "icon": "🔫", "qty": 99, "img": "assets/traveler-s-gun.png"}, {"name": "Icebreaker", "rarity": "Godly", "value": 3800, "icon": "🪓", "qty": 99, "img": "assets/icebreaker.png"}, {"name": "Evergun", "rarity": "Godly", "value": 3400, "icon": "🔫", "qty": 99, "img": "assets/evergun.png"}, {"name": "Constellation", "rarity": "Godly", "value": 2750, "icon": "✨", "qty": 99, "img": "assets/constellation.png"}, {"name": "Evergreen", "rarity": "Godly", "value": 2550, "icon": "🗡️", "qty": 99, "img": "assets/evergreen.png"}, {"name": "Darkshot", "rarity": "Godly", "value": 1120, "icon": "🔫", "qty": 99, "img": "assets/darkshot.png"}, {"name": "Darksword", "rarity": "Godly", "value": 1100, "icon": "🗡️", "qty": 99, "img": "assets/darksword.png"}, {"name": "Blossom", "rarity": "Godly", "value": 1020, "icon": "🌸", "qty": 99, "img": "assets/blossom.png"}, {"name": "Sakura", "rarity": "Godly", "value": 1010, "icon": "🌸", "qty": 99, "img": "assets/sakura.png"}, {"name": "Vampire's Gun", "rarity": "Godly", "value": 975, "icon": "🔫", "qty": 99, "img": "assets/vampire-s-gun.png"}, {"name": "Raygun", "rarity": "Godly", "value": 850, "icon": "🔫", "qty": 99, "img": "assets/raygun.png"}, {"name": "Harvester", "rarity": "Ancient", "value": 800, "icon": "🏹", "qty": 99, "img": "assets/harvester.png"}, {"name": "Icepiercer", "rarity": "Ancient", "value": 750, "icon": "🏹", "qty": 99, "img": "assets/icepiercer.png"}];
+let selected = [];
+let posted = [];
+let botJoined = false;
+let postedSide = 'blue';
+let gems = 12447975375;
+
+function fmt(n){ if(n>=1000000) return (n/1000000).toFixed(n%1000000?1:0)+'M'; if(n>=1000) return (n/1000).toFixed(n%1000?1:0)+'K'; return n.toString(); }
+function renderItems(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const inv=document.getElementById('inventory');
+  inv.innerHTML='';
+  items.filter(it=>it.name.toLowerCase().includes(q)||it.rarity.toLowerCase().includes(q)).forEach(it=>{
+    const realIdx=items.indexOf(it);
+    const picked=selected.includes(realIdx);
+    inv.innerHTML += `<div class="item ${picked?'selectedCard':''}"><img class="itemImg" src="${it.img}" alt="${it.name}"><div class="info"><b>${it.name}</b><small>${it.rarity} • <span class="value">${fmt(it.value)}</span> value</small><br><span class="qty">x${it.qty}</span></div><button class="pick ${picked?'selected':''}" onclick="toggleItem(${realIdx})">${picked?'Selected':'Choose'}</button></div>`;
+  });
+}
+function toggleItem(i){ if(selected.includes(i)) selected=selected.filter(x=>x!==i); else selected.push(i); updateBet(); renderItems(); }
+function updateBet(){
+  const totalBet=selected.reduce((s,i)=>s+items[i].value,0);
+  document.getElementById('betValue').textContent=fmt(totalBet);
+  document.getElementById('selectedList').innerHTML=selected.map(i=>`<span class="chip"><img src="${items[i].img}"> ${items[i].name}</span>`).join('') || '<span class="chip">Aucun item choisi</span>';
+}
+function clearBet(){
+  selected=[]; posted=[]; botJoined=false; updateBet(); renderItems();
+  document.getElementById('matchArea').innerHTML='<p style="color:#aeb6c5">Aucun match posté. Choisis des items puis clique “Post Coinflip”.</p>';
+}
+function postMatch(side){
+  if(selected.length===0){alert('Choisis au moins un item'); return;}
+  posted=[...selected]; postedSide=side; botJoined=false; renderMatch();
+  document.getElementById('matchArea').scrollIntoView({behavior:'smooth'});
+}
+function renderMatch(resultText=''){
+  const totalBet=posted.reduce((s,i)=>s+items[i].value,0);
+  const itemHTML=posted.map(i=>`<span class="mini"><img src="${items[i].img}">${items[i].name}</span>`).join('');
+  document.getElementById('matchArea').innerHTML = `
+    <div class="matchCard" onclick="openDetails()">
+      <div class="matchTop"><b>YOU posted ${postedSide.toUpperCase()} • ${fmt(totalBet)} value</b><button class="viewBtn" onclick="event.stopPropagation();openDetails()">View</button></div>
+      <div class="matchItems">${itemHTML}</div>
+      <div class="matchTop" style="margin-top:12px">
+        <b>${botJoined?'🤖 Bot joined with same items':'Waiting for bot...'}</b>
+        <button class="botBtn" onclick="event.stopPropagation();botJoin()">BOT</button>
+      </div>
+      <div id="coin" class="coin"><div class="coinSide coinBlue">BLEU</div><div class="coinSide coinYellow">JAUNE</div></div>
+      <div class="result">${resultText || 'Clique BOT pour faire rejoindre le bot'}</div>
+    </div>`;
+}
+function botJoin(){
+  if(posted.length===0)return;
+  botJoined=true; renderMatch('Bot a rejoint avec exactement les mêmes items.');
+  const coin=document.getElementById('coin'); coin.classList.add('spin');
+  setTimeout(()=>{
+    coin.classList.remove('spin');
+    const winner=Math.random()<0.5?'you':'bot';
+    const totalBet=posted.reduce((s,i)=>s+items[i].value,0);
+    if(winner==='you'){gems+=totalBet; renderMatch('🎉 WIN 50/50 ! +'+fmt(totalBet)+' gems');}
+    else{gems=Math.max(0,gems-totalBet); renderMatch('❌ LOSE 50/50 ! -'+fmt(totalBet)+' gems');}
+    document.getElementById('gems').textContent=fmt(gems);
+    const finalCoin=document.getElementById('coin');
+    finalCoin.classList.remove('spin','showYellow');
+    const resultSide = (winner==='you') ? postedSide : (postedSide==='blue' ? 'yellow' : 'blue');
+    if(resultSide==='yellow') finalCoin.classList.add('showYellow');
+  },2200);
+}
+function openDetails(){
+  if(posted.length===0)return;
+  const totalBet=posted.reduce((s,i)=>s+items[i].value,0);
+  const grid=posted.map(i=>`<div class="detailItem"><img src="${items[i].img}"><b>${items[i].name}</b><small>${items[i].rarity} • ${fmt(items[i].value)}</small></div>`).join('');
+  document.getElementById('detailContent').innerHTML = `<p><b>YOU items</b> — ${fmt(totalBet)} value</p><div class="detailGrid">${grid}</div><p><b>BOT items</b> — mêmes items</p><div class="detailGrid">${grid}</div>`;
+  openModal('details');
+}
+function scrollToInv(){document.getElementById('invPanel').scrollIntoView({behavior:'smooth'})}
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'))}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal()}));
+renderItems(); updateBet();
+</script>
+</body>
+</html>
